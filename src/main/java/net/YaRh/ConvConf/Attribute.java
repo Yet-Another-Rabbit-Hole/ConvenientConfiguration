@@ -2,13 +2,22 @@ package net.YaRh.ConvConf;
 
 import java.util.function.Consumer;
 
+/**
+ * @since 1.0.0
+ */
 public final class Attribute<T> {
 	
 	private T value = null;
 	private boolean changeable = true;
 	private boolean nullable = false;
+	/**
+	 * @since 1.1.0
+	 */
 	private Consumer<T> onChange = null;
 	
+	/**
+	 * @since 1.1.0
+	 */
 	public Attribute(T value, boolean nullable, Consumer<T> onChange) {
 		this.value = value;
 		this.nullable = nullable;
@@ -18,6 +27,9 @@ public final class Attribute<T> {
 		this.value = value;
 		this.nullable = nullable;
 	}
+	/**
+	 * @since 1.1.0
+	 */
 	public Attribute(T value, Consumer<T> onChange) {
 		this.value = value;
 		this.onChange = onChange;
@@ -25,7 +37,9 @@ public final class Attribute<T> {
 	public Attribute(T value) {
 		this.value = value;
 	}
-	public Attribute() {}
+	public Attribute() {
+		this.nullable = true;
+	}
 	
 	public void setFinal() {
 		this.changeable = false;
@@ -38,8 +52,20 @@ public final class Attribute<T> {
 		this.nullable = true;
 	}
 	
+	/**
+	 * @since 1.1.0
+	 */
 	public void setOnChange(Consumer<T> onChange) {
 		this.onChange = onChange;
+	}
+	
+	/**
+	 * @since 1.1.1
+	 */
+	public Consumer<T> removeOnChange() {
+		Consumer<T> h = onChange;
+		this.onChange = null;
+		return h;
 	}
 	
 	public T get() {
@@ -67,6 +93,8 @@ public final class Attribute<T> {
 	
 	/**
 	 * Calls the {@code onChange} handler
+	 *
+	 * @since 1.1.0
 	 */
 	public void onChange() {
 		if (onChange != null) onChange.accept(value);

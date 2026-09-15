@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
+/**
+ * @since 1.0.0
+ */
 public final class Switch {
 	
 	private static final List<Switch> switches = new ArrayList<>();
@@ -28,20 +31,34 @@ public final class Switch {
 	}
 	
 	public static boolean areAllActive() {
-		return switches.stream().allMatch(Switch::isActive);
+		return switches.stream().allMatch(Switch::get);
 	}
 	
 	private boolean value = false;
+	
+	/**
+	 * @since 1.1.0
+	 */
 	private Consumer<Boolean> onChange = null;
 	
+	/**
+	 * @since 1.1.1
+	 */
+	public Switch(boolean pDefault, Consumer<Boolean> onChange) {
+		this.value = pDefault;
+		this.onChange = onChange;
+	}
+	/**
+	 * @since 1.0.0
+	 */
+	public Switch(boolean pDefault) {
+		this.value = pDefault;
+		Switch.add(this);
+	}
 	/**
 	 * The default is always set to {@code false}
 	 */
 	public Switch() {
-		Switch.add(this);
-	}
-	public Switch(boolean pDefault) {
-		this.value = pDefault;
 		Switch.add(this);
 	}
 	
@@ -64,18 +81,40 @@ public final class Switch {
 		return value;
 	}
 	
+	@Deprecated
 	public boolean isActive() {
 		return value;
 	}
 	
+	/**
+	 * @since 1.1.1
+	 */
+	public boolean get() {
+		return value;
+	}
+	
+	/**
+	 * @since 1.1.0
+	 */
 	public void onChange() {
 		if (onChange != null) onChange.accept(value);
 	}
 	
 	/**
 	 * Calls the {@code onChange} handler
+	 *
+	 * @since 1.1.0
 	 */
 	public void setOnChange(Consumer<Boolean> onChange) {
 		this.onChange = onChange;
+	}
+	
+	/**
+	 * @since 1.1.1
+	 */
+	public Consumer<Boolean> removeOnChange() {
+		Consumer<Boolean> h = onChange;
+		this.onChange = null;
+		return h;
 	}
 }
