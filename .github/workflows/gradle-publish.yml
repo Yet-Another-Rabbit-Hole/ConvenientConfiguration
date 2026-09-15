@@ -44,6 +44,9 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Generate Javadocs
+        run: ./gradlew javadoc
+
       - name: Package Javadocs
         run: |
           cd build/docs
