@@ -2,6 +2,7 @@ package net.YaRh.ConvConf;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 
 public final class Switch {
 	
@@ -31,6 +32,7 @@ public final class Switch {
 	}
 	
 	private boolean value = false;
+	private Consumer<Boolean> onChange = null;
 	
 	/**
 	 * The default is always set to {@code false}
@@ -44,22 +46,36 @@ public final class Switch {
 	}
 	
 	public void enable() {
-		this.value = true;
+		set(true);
 	}
 	public void disable() {
-		this.value = false;
+		set(false);
 	}
 	
 	public void set(boolean pValue) {
+		if (pValue == value) return;
+		
 		this.value = pValue;
+		onChange();
 	}
 	
 	public boolean toggle() {
-		this.value = !value;
+		set(!value);
 		return value;
 	}
 	
 	public boolean isActive() {
 		return value;
+	}
+	
+	public void onChange() {
+		if (onChange != null) onChange.accept(value);
+	}
+	
+	/**
+	 * Calls the {@code onChange} handler
+	 */
+	public void setOnChange(Consumer<Boolean> onChange) {
+		this.onChange = onChange;
 	}
 }
