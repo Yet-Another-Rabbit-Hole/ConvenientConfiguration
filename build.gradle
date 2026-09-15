@@ -1,7 +1,6 @@
 plugins {
     id 'java'
     id 'maven-publish'
-    id 'com.gradleup.shadow' version '9.1.0'
 }
 
 group = 'net.YaRh'
@@ -33,6 +32,7 @@ publishing {
         maven {
             name = "GitHubPackages"
             url = "https://maven.pkg.github.com/Yet-Another-Rabbit-Hole/ConvenientConfiguration"
+
             credentials {
                 username = System.getenv("GITHUB_ACTOR")
                 password = System.getenv("GITHUB_TOKEN")
@@ -44,7 +44,6 @@ publishing {
 tasks.register("updateLocal") {
     dependsOn testClasses
     dependsOn jar
-    dependsOn shadowJar
     dependsOn javadoc
     dependsOn publishToMavenLocal
 }
