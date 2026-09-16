@@ -122,4 +122,21 @@ public final class Switch {
 		this.onChange = null;
 		return h;
 	}
+	
+	/**
+	 * @since 1.3.0
+	 */
+	@Override
+	public String toString() {
+		return Boolean.toString(value);
+	}
+	
+	/**
+	 * @since 1.3.0
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (!(obj instanceof Switch other)) return false;
+		return value == other.get();
+	}
 }

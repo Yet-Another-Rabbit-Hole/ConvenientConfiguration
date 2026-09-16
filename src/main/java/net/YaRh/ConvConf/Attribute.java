@@ -136,4 +136,21 @@ public final class Attribute<T> {
 		this.onChange = null;
 		return h;
 	}
+	
+	/**
+	 * @since 1.3.0
+	 */
+	@Override
+	public String toString() {
+		return value.toString();
+	}
+	
+	/**
+	 * @since 1.3.0
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (!(obj instanceof Attribute<?> other)) return false;
+		return value.equals(other.get());
+	}
 }
