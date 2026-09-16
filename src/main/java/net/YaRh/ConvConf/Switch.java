@@ -25,12 +25,17 @@ public final class Switch {
 	public static void setAll(boolean pValue) {
 		switches.forEach(swtch -> swtch.set(pValue));
 	}
-	
 	public static void toggleAll() {
 		switches.forEach(Switch::toggle);
 	}
-	
+	/**
+	 * @deprecated Use {@link Switch#allSet()}
+	 */
+	@Deprecated(since = "1.2.0", forRemoval = true)
 	public static boolean areAllActive() {
+		return switches.stream().allMatch(Switch::get);
+	}
+	public static boolean allSet() {
 		return switches.stream().allMatch(Switch::get);
 	}
 	
@@ -81,7 +86,7 @@ public final class Switch {
 		return value;
 	}
 	
-	@Deprecated
+	@Deprecated(since = "1.1.1", forRemoval = true)
 	public boolean isActive() {
 		return value;
 	}
