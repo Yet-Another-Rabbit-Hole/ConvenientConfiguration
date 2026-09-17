@@ -5,7 +5,7 @@ import java.util.function.Consumer;
 /**
  * @since 1.0.0
  */
-public final class Attribute<T> {
+public class Attribute<T> {
 	
 	private T value = null;
 	private boolean changeable = true;
@@ -15,23 +15,6 @@ public final class Attribute<T> {
 	 */
 	private Consumer<T> onChange = null;
 	
-	/**
-	 * @since 1.1.0
-	 */
-	@Deprecated(since = "1.2.0", forRemoval = true)
-	public Attribute(T value, boolean nullable, Consumer<T> onChange) {
-		this.value = value;
-		this.nullable = nullable;
-		this.onChange = onChange;
-	}
-	/**
-	 * @since 1.1.0
-	 */
-	@Deprecated(since = "1.2.0", forRemoval = true)
-	public Attribute(T value, boolean nullable) {
-		this.value = value;
-		this.nullable = nullable;
-	}
 	/**
 	 * @since 1.1.0
 	 */
@@ -54,15 +37,6 @@ public final class Attribute<T> {
 	
 	/**
 	 * {@code false} by default
-	 */
-	@Deprecated(since = "1.2.0", forRemoval = true)
-	public Attribute<T> setFinal() {
-		this.changeable = false;
-		return this;
-	}
-	
-	/**
-	 * {@code false} by default
 	 *
 	 * @since 1.2.0
 	 */
@@ -81,13 +55,6 @@ public final class Attribute<T> {
 	
 	public T get() {
 		return value;
-	}
-	/**
-	 * @deprecated Use {@link Attribute#isImmutable()} instead
-	 */
-	@Deprecated(since = "1.2.0", forRemoval = true)
-	public boolean isChangeable() {
-		return changeable;
 	}
 	/**
 	 * @since 1.2.0

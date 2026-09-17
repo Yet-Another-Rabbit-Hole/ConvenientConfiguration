@@ -15,26 +15,24 @@ public final class Switch {
 		switches.add(pSwitch);
 	}
 	
+	@Deprecated(since = "1.4.0", forRemoval = true)
 	public static void enableAll() {
 		switches.forEach(Switch::enable);
 	}
+	@Deprecated(since = "1.4.0", forRemoval = true)
 	public static void disableAll() {
 		switches.forEach(Switch::disable);
 	}
 	
+	@Deprecated(since = "1.4.0", forRemoval = true)
 	public static void setAll(boolean pValue) {
 		switches.forEach(swtch -> swtch.set(pValue));
 	}
+	@Deprecated(since = "1.4.0", forRemoval = true)
 	public static void toggleAll() {
 		switches.forEach(Switch::toggle);
 	}
-	/**
-	 * @deprecated Use {@link Switch#allSet()}
-	 */
-	@Deprecated(since = "1.2.0", forRemoval = true)
-	public static boolean areAllActive() {
-		return switches.stream().allMatch(Switch::get);
-	}
+	@Deprecated(since = "1.4.0", forRemoval = true)
 	public static boolean allSet() {
 		return switches.stream().allMatch(Switch::get);
 	}
@@ -67,6 +65,14 @@ public final class Switch {
 		Switch.add(this);
 	}
 	
+	/**
+	 * @since 1.4.0
+	 */
+	Switch withBox(SwitchBox box) {
+		box.add(this);
+		return this;
+	}
+	
 	public void enable() {
 		set(true);
 	}
@@ -83,11 +89,6 @@ public final class Switch {
 	
 	public boolean toggle() {
 		set(!value);
-		return value;
-	}
-	
-	@Deprecated(since = "1.1.1", forRemoval = true)
-	public boolean isActive() {
 		return value;
 	}
 	
