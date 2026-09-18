@@ -1,33 +1,33 @@
 package net.YaRh.ConvConf;
 
 /**
- * A changeable {@link Integer} value with upper and lower limits
+ * A changeable {@link Float} value with upper and lower limits
  *
- * @since 1.4.0
+ * @since 1.5.0
  */
-public class Dial extends Attribute<Integer> {
+public class FloatDial extends Attribute<Float> {
 	
-	private final Integer minValue;
-	private final Integer maxValue;
+	private final Float minValue;
+	private final Float maxValue;
 	
 	/**
-	 * @since 1.4.0
+	 * @since 1.5.0
 	 */
-	public Dial(Integer value, Integer minValue, Integer maxValue) {
+	public FloatDial(Float value, Float minValue, Float maxValue) {
 		super(value);
 		this.minValue = minValue;
 		this.maxValue = maxValue;
 	}
 	/**
-	 * @since 1.4.0
+	 * @since 1.5.0
 	 */
-	public Dial(Integer minValue, Integer maxValue) {
+	public FloatDial(Float minValue, Float maxValue) {
 		this.minValue = minValue;
 		this.maxValue = maxValue;
 	}
 	
 	@Override
-	public void set(Integer pValue) {
+	public void set(Float pValue) {
 		if (!inBounds(pValue))
 			throw new IllegalStateException("Attempted to set a Dial to a value outside of [%s; %s]"
 					                                .formatted(minValue, maxValue));
@@ -35,7 +35,7 @@ public class Dial extends Attribute<Integer> {
 		super.set(pValue);
 	}
 	
-	public boolean inBounds(Integer pValue) {
+	public boolean inBounds(Float pValue) {
 		if (pValue > maxValue) return false;
 		return pValue >= minValue;
 	}
