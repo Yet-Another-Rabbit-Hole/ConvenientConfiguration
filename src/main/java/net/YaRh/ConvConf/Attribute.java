@@ -7,9 +7,9 @@ import java.util.function.Consumer;
  */
 public class Attribute<T> {
 	
-	private T value = null;
-	private boolean changeable = true;
-	private boolean nullable = false;
+	protected T value = null;
+	protected boolean changeable = true;
+	protected boolean nullable = false;
 	/**
 	 * @since 1.1.0
 	 */
@@ -19,7 +19,7 @@ public class Attribute<T> {
 	 * @since 1.1.0
 	 */
 	public Attribute(T value, Consumer<T> onChange) {
-		this.value = value;
+		this(value);
 		this.onChange = onChange;
 	}
 	/**
